@@ -27,7 +27,8 @@ export default function LoginOptionsScreen() {
         </View>
         <View style={styles.lower}>
           <SkyButton
-            title={"Log in"}
+            title={"Log in with QR code"}
+            icon={{ name: "qr-code", position: "leading" }}
             onPress={() => Alert.alert("Get Started Button Clicked!")}
           />
         </View>

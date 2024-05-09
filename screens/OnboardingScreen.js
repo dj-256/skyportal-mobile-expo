@@ -26,7 +26,7 @@ export default function OnboardingScreen() {
           </Text>
         </View>
         <View style={styles.lower}>
-          <Link href={"/onboarding/loginOptions"} asChild>
+          <Link href={"/onboarding/login-options"} asChild>
             <SkyButton title={"Log in"} />
           </Link>
         </View>
@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: "center",
     color: "#1D3557",
+    height: 54,
   },
   upper: {
     flex: 1,
