@@ -1,3 +1,4 @@
+import { StatusBar } from "expo-status-bar";
 import {
   Alert,
   Image,
@@ -12,18 +13,17 @@ import SkyButton from "../components/SkyButton";
 export default function OnboardingScreen() {
   return (
     <ImageBackground
-      source={require("../assets/img/sky_bg.png")}
-      style={{ flex: 1 }}
+      source={require("../assets/img/onboarding_bg.png")}
+      style={{ flex: 1, resizeMode: "cover" }}
     >
       <SafeAreaView style={styles.container}>
+        <StatusBar style="auto" />
         <View style={styles.upper}>
           <View style={styles.logoContainer}>
             <Image source={require("../assets/img/logo.png")} />
             <Text style={styles.logoText}>SkyPortal</Text>
           </View>
-          <Text style={styles.tagline}>
-            Welcome to SkyPortal Mobile.{"\n"}An Astronomical Data Platform.
-          </Text>
+          <Text style={styles.tagline}>Please choose a login option</Text>
         </View>
         <View style={styles.lower}>
           <SkyButton
@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: "center",
     color: "#1D3557",
+    height: 54,
   },
   upper: {
     flex: 1,

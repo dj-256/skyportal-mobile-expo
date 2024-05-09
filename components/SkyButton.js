@@ -2,8 +2,8 @@ import { Pressable, StyleSheet, Text } from "react-native";
 
 export default function SkyButton(props) {
   return (
-    <Pressable onPress={props.onPress} style={[styles.container, props.style]}>
-      <Text style={[styles.text, props.style]}>{props.title}</Text>
+    <Pressable onPress={props.onPress} style={[styles.button, props.style]}>
+      <Text style={[styles.buttonText, props.style]}>{props.title}</Text>
     </Pressable>
   );
 }
