@@ -9,6 +9,7 @@ import {
   View,
 } from "react-native";
 import SkyButton from "../components/SkyButton";
+import { Link } from "expo-router";
 
 export default function LoginOptionsScreen() {
   return (
@@ -26,9 +27,15 @@ export default function LoginOptionsScreen() {
           <Text style={styles.tagline}>Please choose a login option</Text>
         </View>
         <View style={styles.lower}>
+          <Link href={"/qr-code/scan"} asChild>
+            <SkyButton
+              title={"Scan QR code"}
+              icon={{ name: "qr-code", position: "leading" }}
+            />
+          </Link>
           <SkyButton
-            title={"Log in with QR code"}
-            icon={{ name: "qr-code", position: "leading" }}
+            title={"Log in with token"}
+            type={"secondary"}
             onPress={() => Alert.alert("Get Started Button Clicked!")}
           />
         </View>
@@ -67,5 +74,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     padding: 32,
+    gap: 32,
   },
 });

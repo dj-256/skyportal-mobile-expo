@@ -2,30 +2,40 @@ import { Pressable, StyleSheet, Text } from "react-native";
 import { forwardRef } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 
-const SkyButton = forwardRef((props, ref) => {
-  return (
-    <Pressable
-      onPress={props.onPress}
-      style={[
-        styles.button,
-        props.style,
-        {
-          flexDirection:
-            props.icon.position === "leading" ? "row-reverse" : "row",
-        },
-      ]}
-    >
-      <Text style={[styles.buttonText, props.style]}>{props.title}</Text>
-      {props.icon && (
-        <MaterialIcons
-          name={props.icon.name}
-          color={"white"}
-          style={styles.icon}
-        />
-      )}
-    </Pressable>
-  );
-});
+const SkyButton = forwardRef(
+  ({ title, type = "primary", children, onPress, icon }, ref) => {
+    return (
+      <Pressable
+        onPress={onPress}
+        style={[
+          styles.button,
+          {
+            flexDirection: icon?.position === "leading" ? "row-reverse" : "row",
+            backgroundColor: type === "primary" ? "#457B9D" : "white",
+          },
+        ]}
+      >
+        <Text
+          style={[
+            styles.buttonText,
+            {
+              color: type === "primary" ? "white" : "#457B9D",
+            },
+          ]}
+        >
+          {title}
+        </Text>
+        {icon && (
+          <MaterialIcons
+            name={icon.name}
+            color={type === "primary" ? "white" : "#457B9D"}
+            style={styles.icon}
+          />
+        )}
+      </Pressable>
+    );
+  },
+);
 
 const styles = StyleSheet.create({
   button: {
