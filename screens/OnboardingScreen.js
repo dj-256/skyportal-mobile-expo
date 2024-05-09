@@ -1,5 +1,14 @@
-import {StatusBar} from "expo-status-bar";
-import {Alert, Image, ImageBackground, SafeAreaView, StyleSheet, Text, TouchableHighlight, View,} from "react-native";
+import { StatusBar } from "expo-status-bar";
+import {
+  Alert,
+  Image,
+  ImageBackground,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+import SkyButton from "../components/SkyButton";
 
 export default function OnboardingScreen() {
   return (
@@ -19,15 +28,10 @@ export default function OnboardingScreen() {
           </Text>
         </View>
         <View style={styles.lower}>
-          <TouchableHighlight
-            underlayColor="#386480"
-            activeOpacity={0.1}
+          <SkyButton
+            title={"Log in"}
             onPress={() => Alert.alert("Get Started Button Clicked!")}
-          >
-            <View style={styles.button}>
-              <Text style={styles.buttonText}>Log in</Text>
-            </View>
-          </TouchableHighlight>
+          />
         </View>
       </SafeAreaView>
     </ImageBackground>
