@@ -10,11 +10,11 @@ import {
 } from "react-native";
 import SkyButton from "../components/SkyButton";
 
-export default function OnboardingScreen() {
+export default function LoginOptionsScreen() {
   return (
     <ImageBackground
-      source={require("../assets/img/onboarding_bg.png")}
-      style={{ flex: 1, resizeMode: "cover" }}
+      source={require("../assets/img/sky_bg.png")}
+      style={{ flex: 1 }}
     >
       <SafeAreaView style={styles.container}>
         <StatusBar style="auto" />

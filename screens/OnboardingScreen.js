@@ -1,5 +1,4 @@
 import {
-  Alert,
   Image,
   ImageBackground,
   SafeAreaView,
@@ -8,6 +7,7 @@ import {
   View,
 } from "react-native";
 import SkyButton from "../components/SkyButton";
+import { Link } from "expo-router";
 
 export default function OnboardingScreen() {
   return (
@@ -26,10 +26,9 @@ export default function OnboardingScreen() {
           </Text>
         </View>
         <View style={styles.lower}>
-          <SkyButton
-            title={"Log in"}
-            onPress={() => Alert.alert("Get Started Button Clicked!")}
-          />
+          <Link href={"/onboarding/loginOptions"} asChild>
+            <SkyButton title={"Log in"} />
+          </Link>
         </View>
       </SafeAreaView>
     </ImageBackground>

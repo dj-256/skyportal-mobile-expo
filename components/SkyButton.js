@@ -1,12 +1,13 @@
 import { Pressable, StyleSheet, Text } from "react-native";
+import { forwardRef } from "react";
 
-export default function SkyButton(props) {
+const SkyButton = forwardRef((props, ref) => {
   return (
     <Pressable onPress={props.onPress} style={[styles.button, props.style]}>
       <Text style={[styles.buttonText, props.style]}>{props.title}</Text>
     </Pressable>
   );
-}
+});
 
 const styles = StyleSheet.create({
   button: {
@@ -28,3 +29,5 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
 });
+
+export default SkyButton;
