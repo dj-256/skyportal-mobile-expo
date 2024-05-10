@@ -5,7 +5,14 @@ import { router } from "expo-router";
 
 export default function ScanQrCodeScreen() {
   const [permission, requestPermission] = useCameraPermissions();
-  const [token, setToken] = useState("");
+  const [scanned, setScanned] = useState(false);
+
+  function handleBarcodeScanned(event) {
+    setScanned(true);
+    console.log("Scanned token", event.data);
+    router.push(`/qr-code/check?token=${event.data}`);
+  }
+
   if (!permission) {
     // Camera permissions are still loading.
     return <View />;
@@ -28,16 +35,11 @@ export default function ScanQrCodeScreen() {
       barcodeScannerSettings={{
         barcodeTypes: ["qr"],
       }}
-      onBarcodeScanned={handleBarcodeScanned}
+      onBarcodeScanned={scanned ? undefined : handleBarcodeScanned}
       style={styles.camera}
     ></CameraView>
   );
 }
-
-const handleBarcodeScanned = (event) => {
-  const token = event.data;
-  router.push(`/qr-code/check?token=${token}`);
-};
 
 const styles = StyleSheet.create({
   camera: {
