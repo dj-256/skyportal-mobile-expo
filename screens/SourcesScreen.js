@@ -1,9 +1,18 @@
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { useQuery } from "@tanstack/react-query";
 import { fetchSources } from "../lib/sources";
+import SourceListItem from "../components/SourceListItem";
+import { useTheme } from "@react-navigation/native";
 
 export default function SourcesScreen() {
   // const [page, setPage] = useState(1);
+  const { colors } = useTheme();
   const {
     data: sources,
     status,
@@ -18,7 +27,7 @@ export default function SourcesScreen() {
   if (status === "pending") {
     return (
       <View style={styles.content}>
-        <ActivityIndicator size="large" color={"#457B9D"} />
+        <ActivityIndicator size="large" color={colors.primary} />
       </View>
     );
   }
@@ -32,19 +41,24 @@ export default function SourcesScreen() {
     );
   }
   return (
-    <View key={sources} style={styles.content}>
-      {sources.map((source) => (
-        <Text key={source.id}>{source.id}</Text>
-      ))}
-    </View>
+    <FlatList
+      data={sources}
+      renderItem={({ item }) => <SourceListItem source={item} />}
+      keyExtractor={(item) => item.id}
+      contentContainerStyle={styles.list}
+    />
   );
 }
 
 const styles = StyleSheet.create({
   content: {
     flex: 1,
+    padding: 16,
     justifyContent: "center",
-    alignItems: "center",
     gap: 16,
+  },
+  list: {
+    padding: 16,
+    gap: 12,
   },
 });

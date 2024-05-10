@@ -7,7 +7,6 @@ export default function AppLayout() {
       <Tabs.Screen
         name="sources"
         options={{
-          href: "/(tabs)/sources",
           title: "Sources",
           tabBarIcon: ({ color }) => (
             <MaterialIcons name="storage" size={24} color={color} />
