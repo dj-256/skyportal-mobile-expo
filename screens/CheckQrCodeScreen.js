@@ -1,28 +1,37 @@
 import { ActivityIndicator, View } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { checkToken } from "../lib/auth";
-import { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useTheme } from "@react-navigation/native";
+import { AppContext } from "../lib/context";
+import axios from "axios";
 
 export default function CheckQrCodeScreen() {
   const { token } = useLocalSearchParams();
   const { colors } = useTheme();
-  console.log("Checking token", token);
+  const { userInfo, setUserInfo } = useContext(AppContext);
   useEffect(() => {
     const stuff = () => {
-      setTimeout(() => {
-        checkToken(token)
-          .then((userInfo) => {
-            console.log(userInfo);
+      if (userInfo.instance) {
+        return checkToken(token, userInfo.instance)
+          .then(() => {
+            const axiosClient = axios.create({
+              baseURL: userInfo.instance.url,
+              headers: {
+                Authorization: `token ${token}`,
+              },
+            });
+            setUserInfo({ ...userInfo, token, axiosClient });
             router.navigate("/login-ok");
           })
           .catch((error) => {
-            console.error("Invalid token", error);
+            console.error("Invalid token");
+            console.error(error);
           });
-      }, 1000);
+      }
     };
     stuff();
-  }, [token]);
+  }, []);
 
   if (!token) {
     return <View />;

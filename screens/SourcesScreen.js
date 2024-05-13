@@ -9,20 +9,23 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchSources } from "../lib/sources";
 import SourceListItem from "../components/SourceListItem";
 import { useTheme } from "@react-navigation/native";
+import React, { useContext, useState } from "react";
+import { AppContext } from "../lib/context";
 
 export default function SourcesScreen() {
   // const [page, setPage] = useState(1);
+  const { userInfo } = useContext(AppContext);
+  const [page, setPage] = useState(1);
+  const [numPerPage, setNumPerPage] = useState(10);
   const { colors } = useTheme();
   const {
     data: sources,
     status,
     error,
   } = useQuery({
-    queryKey: ["sources"],
-    queryFn: () => fetchSources(1, 10),
+    queryKey: ["sources", page, numPerPage, userInfo.axiosClient],
+    queryFn: () => fetchSources(userInfo.axiosClient, page, numPerPage),
   });
-
-  console.log(status);
 
   if (status === "pending") {
     return (

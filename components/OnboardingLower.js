@@ -4,13 +4,11 @@ import RNPickerSelect from "react-native-picker-select";
 import { INSTANCES } from "../lib/constants";
 import { Link } from "expo-router";
 import { baseColors } from "../lib/theme";
+import { AppContext } from "../lib/context";
+import React, { useContext } from "react";
 
-export default function OnboardingLower({
-  page,
-  setPage,
-  setInstance,
-  instance,
-}) {
+export default function OnboardingLower({ page, setPage }) {
+  const { userInfo, setUserInfo } = useContext(AppContext);
   if (page === "welcome")
     return (
       <View style={styles.lower}>
@@ -25,10 +23,12 @@ export default function OnboardingLower({
             inputIOS: styles.instanceSelect,
             inputAndroid: styles.instanceSelect,
           }}
-          onValueChange={(value) => setInstance(value)}
+          onValueChange={(value) =>
+            setUserInfo({ ...userInfo, instance: value })
+          }
           items={INSTANCES.map((instance) => ({
             label: instance.name,
-            value: instance.url,
+            value: instance,
           }))}
         />
         <View style={styles.loginMethods}>
@@ -36,7 +36,7 @@ export default function OnboardingLower({
             <SkyButton
               title={"Scan QR code"}
               icon={{ name: "qr-code", position: "leading" }}
-              onPress={(e) => instance === null && e.preventDefault()}
+              onPress={(e) => userInfo.instance === null && e.preventDefault()}
             />
           </Link>
           <SkyButton
